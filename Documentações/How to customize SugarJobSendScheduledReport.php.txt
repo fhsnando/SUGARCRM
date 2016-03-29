@@ -1,0 +1,77 @@
+Description: We're working on a solution to scheduled reports and we need some help in order to customize some files.
+The scheduled reports uses a simple label with some user and report info and we need to customize it in order to add other elements. We found that the class "include/SugarQueue/jobs/SugarJobSendScheduledReport.php" is responsible to handle this. How can we override the render function once the class folder is out custom hierarchy?.
+
+Thanks in advance
+
+
+Scheduler Customizations
+
+The way I would approach this would be to create a custom scheduler that mimics the default report scheduler. In this case you'll actually have to create two custom schedulers.
+
+I have based most of the code for this customization off of the developer guide article here:
+
+http://support.sugarcrm.com/Documentation/Sugar_Developer/Sugar_Developer_Guide_7.6/API/Application/Job_Queue/Schedulers/Custom_Schedulers/
+
+We will have to duplicate the "processQueue" scheduler as well as the "SugarJobSendScheduledReport" scheduler. Lets start with the processQueue.
+
+In the root of the Sugar instance, you'll see a file called:
+
+./process_queue.php
+
+Lets duplicate that file to:
+
+./custom/Extension/modules/Schedulers/Ext/ScheduledTasks/myProcessQueue.php
+
+Following the example in the dev guide, we'll need to add the the custom job to the $job_strings array, and convert it into a function (also return true at the end of the function to indicate to the cron job it completed successfully). Your finished code for this file should look something like this:
+
+<?php
+array_push($job_strings, 'myProcessQueue');
+
+function myProcessQueue(){
+// code from ./process_queue.php
+...
+return true;
+}
+
+You'll notice in the code from the process_queue file, there is this section:
+
+$job->target = 'class::SugarJobSendScheduledReport';
+
+Lets change that to:
+
+$job->target = 'class::CustomSugarJobSendScheduledReport';
+
+Next, lets duplicate the following file:
+
+./include/SugarQueue/jobs/SugarJobSendScheduledReport.php
+
+To:
+
+./custom/Extension/modules/Schedulers/Ext/ScheduledTasks/CustomSugarJobSendScheduledReport.php
+
+Lets modify this new file and change the require and class definition to this:
+
+<?php
+
+require_once 'include/SugarQueue/jobs/SugarJobSendScheduledReport.php';
+
+class CustomSugarJobSendScheduledReport extends SugarJobSendScheduledReport
+{
+
+...
+
+This way we are extending the original class instead of completely overriding it. Granted, you'll be changing the run method which is 99% of the file... but its good practice all the same. So, if you are modifying the run method, feel free to remove the other properties and methods. Insert in your planned changes to the run method.
+
+Last, following the directions in the dev guide article, create the following file:
+
+./custom/Extension/modules/Schedulers/Ext/Language/en_us.custom_job.php
+
+With the contents to match your new process_queue job:
+
+<?php
+
+$mod_strings['LBL_MYPROCESSQUEUE'] = 'My Custom Reports Scheduler';
+
+Now... perform a Quick Repair and Rebuild from Admin > Repair. You can now create a new scheduler in Admin > Schedulers and select your new process_queue job. I would also recommend deleting the old Reports Scheduler job, just to make sure they don't collide.
+
+

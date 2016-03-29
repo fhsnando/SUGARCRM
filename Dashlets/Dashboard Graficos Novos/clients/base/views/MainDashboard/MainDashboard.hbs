@@ -1,0 +1,98 @@
+
+<style>
+    .thClass {background-color:#a4a4a4;}
+</style>
+<body class="full-screen">
+    <div style="width: 100%; height: 100%" >
+        <section id="sectionDashboard">
+
+            <div>
+                <table id="mainTableRegional" class="table">
+                    <thead>
+                    <th>
+                        <b>Período</b>
+                    </th>
+                    <th>
+                        <b>Filtrar</b>
+                    </th>
+                    </thead>
+                    <tr>
+                        <td>
+                            <select class="select2"  id="selectPeriodoR"  data-placeholder="Selecione" style="padding-left:5px">
+                                <option></option>
+                                <option value="month">Mês Atual</option>
+                                <option value="semester">Semestre Atual</option>
+                                <option value="previous">Semestre Anterior</option></select>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn" id="buttonFilterR" type="button">Filtrar</button>
+                        </td>
+                    </tr>
+                </table>
+                <div id="container" style="min-width: 210px; height: 350px; margin: 0 auto"></div>
+                <br/>
+                <table id="mainTableUnidade" class="table">
+                    <thead>
+                    <th>
+                        <b>Regional</b>
+                    </th>
+                    <th>
+                        <b>Período</b>
+                    </th>
+                    <th>
+                        <b>Filtrar</b>
+                    </th>
+                    </thead>
+                    <tr>
+                        <td>
+                            <select class="select2"  id="selectRegionalU"  data-placeholder="Selecione" style="padding-left:5px"><option></option></select>
+                        </td>
+                        <td>
+                            <select class="select2"  id="selectPeriodoU"  data-placeholder="Selecione" style="padding-left:5px">
+                                <option></option>
+                                <option value="month">Mês Atual</option>
+                                <option value="semester">Semestre Atual</option>
+                                <option value="previous">Semestre Anterior</option></select>
+                        </td>
+                        <td>
+                            <button class="btn" id="buttonFilterU" type="button">Filtrar</button>
+                        </td>
+                    </tr>
+                </table>
+                <div id="containerU" style="min-width: 210px; height: 350px; margin: 0 auto"></div>
+                <br/>
+                <table id="mainTableId" class="table">
+                    <thead>
+                    <th>
+                        <b>Período</b>
+                    </th>
+                    <th>
+                        <b>Filtrar</b>
+                    </th>
+                    </thead>
+                    <tr>
+                        <td>
+                            <select class="select2"  id="selectPeriodoA"  data-placeholder="Selecione" style="padding-left:5px">
+                                <option></option>
+                                <option value="month">Mês Atual</option>
+                                <option value="semester">Semestre Atual</option>
+                                <option value="previous">Semestre Anterior</option>
+                            </select>
+                        </td>
+                        <td>
+                            <button class="btn" id="buttonFilterA" type="button">Filtrar</button>
+                        </td>
+                    </tr>
+                </table>
+                <div id="containerA" style="min-width: 210px; height: 350px; margin: 0 auto"></div>
+
+            </div>
+
+        </section>
+    </div>
+</body>
+<script>
+    $('.select2').select2({width:'200px',allowClear:true});
+
+</script>
