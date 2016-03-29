@@ -1,0 +1,1 @@
+Replicar os dashlets para todos os usuários das roles
