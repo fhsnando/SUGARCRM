@@ -3,9 +3,11 @@
 echo 'Entrou Pré execute<br>';
 
 $role_id="('b6ed9d65-1907-06d2-e893-56fa7c27d356')";
-$dashboard_id="('b9f5bd56-1047-1832-1e8d-56f156f72a96')";
-$module="Cases";
-$view="record";
+$dashboard_id="('2600e192-7adc-f10d-3404-56ec91c4dd0e')";
+//$module="Cases";
+$module="Home";
+$view="";
+//record, record, null
 
 echo 'Consulta Usuários<br>';
 
@@ -22,6 +24,10 @@ $sql = "select * from dashboards
        where  id IN $dashboard_id
     and deleted!=1 and dashboard_module='$module'
     and dashboard_type='dashboard';";
+//$sql = "select * from dashboards
+//       where  id IN $dashboard_id
+//    and deleted!=1 and dashboard_module='$module' and view_name='$view'
+//    and dashboard_type='dashboard';";
 
 $result_metadata = $GLOBALS['db']-> query($sql);
 echo $sql."<br>";
@@ -63,9 +69,9 @@ $GLOBALS['log']-> fatal(print_r($dashboads,true));
                 $sql="UPDATE dashboards SET deleted = 1 WHERE assigned_user_id = '".$row_user['user_id']."' AND NAME ='$name'";
                 $GLOBALS['db']-> query($sql);
 
-                $sql="INSERT INTO dashboards(view_name,id,metadata,name,assigned_user_id,created_by,
+                $sql="INSERT INTO dashboards(id,view_name,metadata,name,assigned_user_id,created_by,
                   modified_user_id,dashboard_module,dashboard_type)
-                  values ('".$dashboad["view_name"]."',UUID(), '$metadata','".$dashboard["name"]."','".$row_user["user_id"]."',
+                  values (UUID(),'$view','$metadata','".$dashboard["name"]."','".$row_user["user_id"]."',
                 '".$dashboard["created_by"]."','".$dashboard["modified_user_id"]."','".$dashboard["dashboard_module"]."',
                 '".$dashboard["dashboard_type"]."');";
                 $GLOBALS['db']-> query($sql);
