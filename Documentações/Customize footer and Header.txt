@@ -1,0 +1,80 @@
+Objetivo:
+Remover os recursos de aprendizagem e mobile da barra inferior. Alem do botão de notificação da barra superior.
+
+Tarefa:
+Analisar a viabilidade da seguinte solução.
+Criar na maquina de dev uma prova de conceito da seguinte implementação.
+
+
+Solução proposta pelo odin.
+Hi Tomas and Ivan,
+
+
+Please test the following procedures to take off the Notification and footers buttons from Sugar Aplication according to these enhancement request from Kroton:
+-Retirar todos os itens de "Recursos e Aprendizagens"
+
+-Deixar a função mobile inativa, já que ela nem está disponível ainda.
+
+-No menu superior, ao lado da barra de pesquisa, há um ícone de notificações. Deixá-lo inabilitado, pois o Polo não fará na por hora nele
+
+
+y checked with my team and these procedure will be upgrade-safe.
+
+To remove Notification button  you need to create a copy of the “header layout file” located here:
+
+./clients/base/layouts/header/header.php
+
+Copy the file and create the path if needed to here:
+
+./custom/clients/base/layouts/header/header.php
+
+The section you need to edit looks like this:
+
+ese archivo tiene una seccion que lee asi:
+  array(
+            'layout' => 'module-list',
+        ),
+        array(
+            'view' => 'globalsearch',
+        ),
+        array(
+            'view' => 'notifications',
+        ),
+
+Remove the entry corresponding  to notifications.
+
+Save the file… go to Sugar admin page run a “repair and rebuild”.
+
+
+Same case about the footer buttons:
+
+Base file is located here:
+
+./clients/base/layouts/footer
+
+Copy the file to
+
+./custom/clients/base/layouts/footer/footer.php
+
+It will looks like this:
+
+  array(
+            'view' => 'mobile-action',
+        ),
+        array(
+            'view' => 'language-actions',
+        ),
+        array(
+            'view' => 'footer-actions',
+        ),
+
+
+Edit the entries removing the buttons as needed.
+
+Best Regards
+
+Odin Cisneros A
+Technical Account Manager LATAM
+
+Mobile: +521 5528864390
+Email: oarellano@sugarcrm.com
