@@ -2,9 +2,9 @@
   class Database
   {
 
-      private static $dbName = 'itfuture' ;
-      private static $dbHost = 'localhost' ;
-      private static $dbUsername = 'root';
+      private static $dbName = '' ;
+      private static $dbHost = '' ;
+      private static $dbUsername = '';
       private static $dbUserPassword = '';
 
       private static $cont  = null;
@@ -15,7 +15,7 @@
 
       public static function connect()
       {
-          // Uma conex„o atravÈs da aplicaÁ„o inteira
+          // Uma conex√£o atrav√©s da aplica√ß√£o inteira
           if ( null == self::$cont )
           {
               try
