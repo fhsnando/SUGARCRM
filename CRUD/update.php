@@ -84,9 +84,6 @@
     <link   href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.mask.js"></script>
-    <scrip>
-        $('.mask_phone').mask('(00) 0000-00009',{clearIfNotMatch: false,placeholder: "(__) ____-_____",reverse: false});
-    </scrip>
 </head>
 <body>
 <div class="container">

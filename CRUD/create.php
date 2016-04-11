@@ -1,6 +1,7 @@
 <?php
 
 require 'database.php';
+$skill=null;
 
 if ( !empty($_POST)) {
     // Criando as validações de erros ao digitar

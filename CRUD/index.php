@@ -5,6 +5,11 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery-1.6.min.js"></script>
+    <script src="js/table2CSV.js"></script>
+    <script src="js/sorttable.js"></script>
+    <script src="js/jquery.battatech.excelexport.js"></script>
+
+
     <style>
         .search{
             display: block; width: 350px; left: 380px; top: 5px; z-index: 7005; position: absolute;
@@ -13,6 +18,31 @@
 
         }
     </style>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#btnExport").click(function () {
+                $("#tblExport").battatech_excelexport({
+                    containerid: "tblExport"
+                    , datatype: 'table'
+                });
+            });
+        });
+        $(document).ready(function() {
+
+            $('.table').each(function() {
+                var $table = $(this);
+
+                var $button = $("#export");
+
+                $button.click(function() {
+                    var csv = $table.table2CSV({delivery:'value'});
+                    window.location.href = 'data:text/csv;charset=ISO-8859-1,'
+                        + encodeURIComponent(csv);
+                });
+            });
+        })
+    </script>
+
 
 </head>
 <body>
@@ -21,11 +51,15 @@
         <h3>Sistema ItFuture</h3>
     </div>
     <div class="row">
-        <p><a href="create.php" class="btn btn-success">Criar</a>
+        <a href="create.php" class="btn btn-success">Criar</a>
         <a  href="index.php?search=true" class="btn btn-success">Procurar</a>
-        <a  href="index.php" class="btn btn-success">Mostrar Todos</a></p>
+        <a  href="index.php" class="btn btn-success">Mostrar Todos</a>
+        <a  href="skills.php" class="btn btn-success">Especialidades</a>
+        <a  id="export" class="btn btn-success">Exportar para CSV</a>
+        <a  id="btnExport" class="btn btn-success">Exportar para Excel</a></p>
 
-        <table class="table table-striped table-bordered">
+
+        <table id="tblExport" class="table table-striped table-bordered sortable">
             <thead>
             <tr>
                 <th>Nome</th>
@@ -127,4 +161,5 @@
 
 <?php endif; ?>
 </body>
+
 </html>

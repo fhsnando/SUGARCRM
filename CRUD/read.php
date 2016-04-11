@@ -30,47 +30,30 @@ if ( null==$id ) {
 <div class="container">
     <div class="span10 offset1">
         <div class="row">
-            <h3>Ler um registro</h3>
+            <h3 align="center">Detalhes do registro</h3>
         </div>
-        <div class="form-horizontal" >
-            <div class="control-group">
-                <label class="control-label">Nome</label>
-                <div class="controls">
-                    <label class="checkbox">
-                        <?php echo $data['name'];?>
-                    </label>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">CRM</label>
-                <div class="controls">
-                    <label class="checkbox">
-                        <?php echo $data['crm'];?>
-                    </label>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label">Telefone</label>
-                <div class="controls">
-                    <label class="checkbox">
-                        <?php echo $data['phone'];?>
-                    </label>
-                </div>
-            </div>
 
-            </div>
-            <div class="control-group">
-                <label class="control-label">Especialiadade</label>
-                <div class="controls">
-                    <label class="checkbox">
-                        <?php echo $data['skill_name'];?>
-                    </label>
-                </div>
-            </div>
-
-            <div class="form-actions">
-                <a class="btn default" href="index.php">Back</a>
-            </div>
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Nome</th>
+                <th>CRM</th>
+                <th>Telefone</th>
+                <th>Especialidade</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td><?php echo $data['name'];?></td>
+                <td><?php echo $data['crm'];?></td>
+                <td><?php echo $data['phone'];?></td>
+                <td><?php echo $data['skill_name'];?></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="form-actions">
+            <a class="btn default" href="index.php">Back</a>
+        </div>
         </div>
     </div>
 </div> <!-- /container -->
